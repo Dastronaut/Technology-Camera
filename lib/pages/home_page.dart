@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:s_camera/widgets/my_drawer.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -25,11 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      drawer: const SafeArea(
-        child: Drawer(
-          child: Text('Click'),
-        ),
-      ),
+      drawer: const MyDrawer(),
       body: const Center(
         child: Text(''),
       ),
