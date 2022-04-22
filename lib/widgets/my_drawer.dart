@@ -25,14 +25,17 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
             const SizedBox(
-              width: double.infinity,
-              height: 150,
+              height: 200,
               child: CircleAvatar(
-                radius: 30.0,
-                backgroundImage: AssetImage(
-                  'assets/images/hama.jpg',
+                radius: 110,
+                backgroundColor: Colors.black12,
+                child: CircleAvatar(
+                  radius: 90,
+                  backgroundImage: AssetImage(
+                    'assets/images/das.jpg',
+                  ),
+                  backgroundColor: Colors.transparent,
                 ),
-                backgroundColor: Colors.transparent,
               ),
             ),
             const DrawerListTile(
