@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:s_camera/pages/camera_page.dart';
 import 'package:s_camera/widgets/my_drawer.dart';
 
 import 'device_page.dart';
 import 'library_page.dart';
 
+=======
+import 'package:s_camera/widgets/my_drawer.dart';
+
+>>>>>>> 76e183aca79740ca9f8e173e1228fc7dbcbc59c0
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -13,6 +18,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+<<<<<<< HEAD
   int _selectedIndex = 0;
   final _wighetOptions = [
     const DevicePage(),
@@ -23,10 +29,13 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
     });
   }
+=======
+>>>>>>> 76e183aca79740ca9f8e173e1228fc7dbcbc59c0
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+<<<<<<< HEAD
         backgroundColor: Colors.lightBlue,
         foregroundColor: Colors.white,
         elevation: 10,
@@ -35,6 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             onPressed: OnClickCamera,
+=======
+        title: const Text('TechCAM'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+>>>>>>> 76e183aca79740ca9f8e173e1228fc7dbcbc59c0
             icon: const Icon(Icons.splitscreen_outlined),
           ),
           IconButton(
@@ -42,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {},
           ),
         ],
+<<<<<<< HEAD
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
@@ -75,4 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget gotoCamera(BuildContext context){
     return const CameraPage();
   }
+=======
+      ),
+      drawer: const MyDrawer(),
+      body: const Center(
+        child: Text(''),
+      ),
+    );
+  }
+>>>>>>> 76e183aca79740ca9f8e173e1228fc7dbcbc59c0
 }
