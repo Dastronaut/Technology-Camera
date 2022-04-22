@@ -18,3 +18,4 @@ class _DevicePageState extends State<DevicePage> {
     );
   }
 }
+
