@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "225202499598",
+    "project_id": "technologycamera-9ff50",
+    "storage_bucket": "technologycamera-9ff50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225202499598:android:d9a993eab76dbc26df4c5f",
+        "android_client_info": {
+          "package_name": "com.example.s_camera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225202499598-i47m9hmaaoe1b23ig1ivlvdmak61r6el.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.s_camera",
+            "certificate_hash": "3a0a735ab1a3121fc62107415fa00426304bbf14"
+          }
+        },
+        {
+          "client_id": "225202499598-qu9r3a3c3hv97kqho36hbu15qie6jpqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxTLExQEjN_GSDTM7u3IpNo04odj0mCW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225202499598-qu9r3a3c3hv97kqho36hbu15qie6jpqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
