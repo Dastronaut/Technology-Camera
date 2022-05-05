@@ -8,10 +8,13 @@ class CameraPage extends StatefulWidget {
 }
 
 class _CameraPageState extends State<CameraPage> {
+  final controller = ScrollController();
+  int currentTab = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         centerTitle: true,
         title: const Text("Trực tiếp", style: TextStyle(fontSize: 25,color: Colors.white)),
         actions: const [
@@ -20,38 +23,56 @@ class _CameraPageState extends State<CameraPage> {
             child: Icon(Icons.splitscreen_outlined),
           )
         ],
-        backgroundColor: Colors.lightBlue,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              gradient: LinearGradient(
+                colors: [Colors.purple,Colors.pink],
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+              )
+          ),
+        ),
         elevation: 10,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
       ),
+
       body: Container(
         constraints: const BoxConstraints.expand(),
         color: Colors.white,
       ),
-      bottomNavigationBar: BottomNavigationBar(
 
-        items: const [
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   child: Icon(Icons.admin_panel_settings),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.purpleAccent,
+        type: BottomNavigationBarType.fixed,
+        items: const[
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt_outlined),
             label: "Chụp màn hình",
-            backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.volume_up_outlined),
             label: "Âm lượng",
-            backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.stop),
+            icon: Icon(Icons.pause),
             label: "Tạm dừng",
-            backgroundColor: Colors.white,
           ),
-
-
-
+          BottomNavigationBarItem(
+            icon: Icon(Icons.videocam_outlined),
+            label: "Ghi",
+          ),
         ],
+        selectedItemColor: Colors.white,
+        selectedLabelStyle: TextStyle(fontSize: 15),
       ),
     );
   }
