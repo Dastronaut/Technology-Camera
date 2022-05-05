@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:s_camera/pages/home_page.dart';
@@ -5,6 +6,8 @@ import 'package:s_camera/pages/registration_page.dart';
 
 import '../common/theme_helper.dart';
 import '../widgets/header_widget.dart';
+
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,6 +20,14 @@ class _LoginPageState extends State<LoginPage> {
   final double _headerHeight = 250;
   final Key _formKey = GlobalKey<FormState>();
 
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController otpController = TextEditingController();
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  String verificationIDReceived = "";
+
+  bool otpCodeVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,44 +62,66 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               Container(
                                 child: TextField(
+                                  controller: phoneController,
                                   decoration: ThemeHelper().textInputDecoration(
                                       'User Name', 'Enter your user name'),
+                                  keyboardType: TextInputType.phone,
                                 ),
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
                               ),
-                              const SizedBox(height: 30.0),
+                              SizedBox(height: 30.0,),
                               Container(
-                                child: TextField(
-                                  obscureText: true,
-                                  decoration: ThemeHelper().textInputDecoration(
-                                      'Password', 'Enter your password'),
-                                ),
-                                decoration:
-                                    ThemeHelper().inputBoxDecorationShaddow(),
-                              ),
-                              const SizedBox(height: 15.0),
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(10, 0, 10, 20),
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) =>
-                                    //           ForgotPasswordPage()),
-                                    // );
-                                  },
-                                  child: const Text(
-                                    "Forgot your password?",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                    ),
+                                child: Visibility(
+                                  visible: otpCodeVisible,
+                                  child: TextField(
+                                    controller: otpController,
+                                    decoration: ThemeHelper().textInputDecoration(
+                                        'Code', 'Enter your code'),
                                   ),
                                 ),
+                                decoration:
+                                ThemeHelper().inputBoxDecorationShaddow(),
                               ),
+                              // Container(
+                              //   child:
+                              //   decoration:
+                              //   ThemeHelper().inputBoxDecorationShaddow(),
+                              // ),
+
+                              // const SizedBox(height: 30.0),
+                              // Container(
+                              //   child: TextField(
+                              //     obscureText: true,
+                              //     decoration: ThemeHelper().textInputDecoration(
+                              //         'Password', 'Enter your password'),
+                              //   ),
+                              //   decoration:
+                              //       ThemeHelper().inputBoxDecorationShaddow(),
+                              // ),
+                              // const SizedBox(height: 15.0),
+                              // Container(
+                              //   margin:
+                              //       const EdgeInsets.fromLTRB(10, 0, 10, 20),
+                              //   alignment: Alignment.topRight,
+                              //   child: GestureDetector(
+                              //     onTap: () {
+                              //       // Navigator.push(
+                              //       //   context,
+                              //       //   MaterialPageRoute(
+                              //       //       builder: (context) =>
+                              //       //           ForgotPasswordPage()),
+                              //       // );
+                              //     },
+                              //     child: const Text(
+                              //       "Forgot your password?",
+                              //       style: TextStyle(
+                              //         color: Colors.grey,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                              SizedBox(height: 30.0,),
                               Container(
                                 decoration:
                                     ThemeHelper().buttonBoxDecoration(context),
@@ -98,7 +131,8 @@ class _LoginPageState extends State<LoginPage> {
                                     padding: const EdgeInsets.fromLTRB(
                                         40, 10, 40, 10),
                                     child: Text(
-                                      'Sign In'.toUpperCase(),
+                                      otpCodeVisible ? "Sign In" : "Verify",
+                                      // 'Sign In'.toUpperCase(),
                                       style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
@@ -106,12 +140,19 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   onPressed: () {
+                                    if(otpCodeVisible){
+                                      verifyCode();
+                                    }
+                                    else{
+                                      verifyNumber();
+                                    }
+
                                     //After successful login we will redirect to profile page. Let's create profile page now
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const MyHomePage()));
+                                    // Navigator.pushReplacement(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             const MyHomePage()));
                                   },
                                 ),
                               ),
@@ -149,5 +190,36 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void verifyNumber() {
+    auth.verifyPhoneNumber(
+        phoneNumber: phoneController.text,
+        verificationCompleted: (PhoneAuthCredential credential) async{
+          await auth.signInWithCredential(credential).then((value) {
+            print("You are logged in successfully");
+          });
+        },
+        verificationFailed: (FirebaseAuthException exception){
+          print(exception.message);
+        },
+        codeSent: (String verificationID, int? resendToken){
+          verificationIDReceived = verificationID;
+          otpCodeVisible = true;
+          setState(() {
+
+          });
+        },
+        codeAutoRetrievalTimeout: (String verificationID){
+        });
+  }
+
+  void verifyCode() async{
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationIDReceived,
+        smsCode: otpController.text);
+    await auth.signInWithCredential(credential).then((value) {
+      MyHomePage();
+    });
   }
 }

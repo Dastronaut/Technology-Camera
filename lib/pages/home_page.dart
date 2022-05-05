@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:s_camera/pages/camera_page.dart';
@@ -31,7 +32,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            gradient: LinearGradient(
+              colors: [Colors.purple,Colors.pink],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            )
+          ),
+        ),
         foregroundColor: Colors.white,
         elevation: 10,
         title: const Text('TechCAM', style: TextStyle(fontSize: 25)),
@@ -52,19 +62,33 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       drawer: const MyDrawer(),
       body: _wighetOptions[_selectedIndex],
+<<<<<<< HEAD
+
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //     backgroundColor: Color.fromRGBO(255, 0, 0, 0.0),
+      //   child: Icon(Icons.admin_panel_settings_outlined)
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.purpleAccent,
+        items: [
+=======
       bottomNavigationBar: BottomNavigationBar(
         items: const [
+>>>>>>> aac2c72f152aa6c3ea0685704a5e296d5225123a
           BottomNavigationBarItem(
-            icon: Icon(Icons.widgets),
+            icon: Icon(Icons.widgets_outlined,color: _selectedIndex == 0 ? Colors.white:Colors.black,size: 30),
             label: "Thiết bị",
-            backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.live_tv_outlined),
+            icon: Icon(Icons.live_tv_outlined,color: _selectedIndex == 1 ? Colors.white:Colors.black,size: 30),
             label: "Thư viện",
-            backgroundColor: Colors.white,
           ),
         ],
+        selectedItemColor: Colors.white,
+        selectedLabelStyle: TextStyle(fontSize: 15),
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
       ),
