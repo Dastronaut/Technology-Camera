@@ -35,9 +35,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   hexcolor: ^2.0.6
   font_awesome_flutter: ^10.1.0
+<<<<<<< HEAD
   firebase_core: ^1.16.0
   firebase_auth: ^3.3.17
 
+=======
+  firebase_core: ^1.15.0
+  firebase_auth: ^3.3.15
+>>>>>>> aac2c72f152aa6c3ea0685704a5e296d5225123a
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +69,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo_cam1.png
-    - assets/images/hama.jpg
+    - assets/images/das.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:s_camera/pages/camera_page.dart';
 import 'package:s_camera/widgets/my_drawer.dart';
 
@@ -21,11 +22,12 @@ class _MyHomePageState extends State<MyHomePage> {
     const DevicePage(),
     const LibraryPage(),
   ];
-  void _onItemTap(int index){
+  void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,10 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
           borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
       ),
-
       drawer: const MyDrawer(),
-
       body: _wighetOptions[_selectedIndex],
+<<<<<<< HEAD
 
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {},
@@ -73,6 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.purpleAccent,
         items: [
+=======
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+>>>>>>> aac2c72f152aa6c3ea0685704a5e296d5225123a
           BottomNavigationBarItem(
             icon: Icon(Icons.widgets_outlined,color: _selectedIndex == 0 ? Colors.white:Colors.black,size: 30),
             label: "Thiết bị",
@@ -89,10 +94,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-  void OnClickCamera(){
+
+  void OnClickCamera() {
     Navigator.push(context, MaterialPageRoute(builder: gotoCamera));
   }
-  Widget gotoCamera(BuildContext context){
+
+  Widget gotoCamera(BuildContext context) {
     return const CameraPage();
   }
 }
