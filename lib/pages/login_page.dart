@@ -7,8 +7,6 @@ import 'package:s_camera/pages/registration_page.dart';
 import '../common/theme_helper.dart';
 import '../widgets/header_widget.dart';
 
-
-
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -64,64 +62,32 @@ class _LoginPageState extends State<LoginPage> {
                                 child: TextField(
                                   controller: phoneController,
                                   decoration: ThemeHelper().textInputDecoration(
-                                      'User Name', 'Enter your user name'),
+                                      'Phone Number',
+                                      'Enter your phone number'),
                                   keyboardType: TextInputType.phone,
                                 ),
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
                               ),
-                              SizedBox(height: 30.0,),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
                               Container(
                                 child: Visibility(
                                   visible: otpCodeVisible,
                                   child: TextField(
                                     controller: otpController,
-                                    decoration: ThemeHelper().textInputDecoration(
-                                        'Code', 'Enter your code'),
+                                    decoration: ThemeHelper()
+                                        .textInputDecoration(
+                                            'Code', 'Enter your code'),
                                   ),
                                 ),
                                 decoration:
-                                ThemeHelper().inputBoxDecorationShaddow(),
+                                    ThemeHelper().inputBoxDecorationShaddow(),
                               ),
-                              // Container(
-                              //   child:
-                              //   decoration:
-                              //   ThemeHelper().inputBoxDecorationShaddow(),
-                              // ),
-
-                              // const SizedBox(height: 30.0),
-                              // Container(
-                              //   child: TextField(
-                              //     obscureText: true,
-                              //     decoration: ThemeHelper().textInputDecoration(
-                              //         'Password', 'Enter your password'),
-                              //   ),
-                              //   decoration:
-                              //       ThemeHelper().inputBoxDecorationShaddow(),
-                              // ),
-                              // const SizedBox(height: 15.0),
-                              // Container(
-                              //   margin:
-                              //       const EdgeInsets.fromLTRB(10, 0, 10, 20),
-                              //   alignment: Alignment.topRight,
-                              //   child: GestureDetector(
-                              //     onTap: () {
-                              //       // Navigator.push(
-                              //       //   context,
-                              //       //   MaterialPageRoute(
-                              //       //       builder: (context) =>
-                              //       //           ForgotPasswordPage()),
-                              //       // );
-                              //     },
-                              //     child: const Text(
-                              //       "Forgot your password?",
-                              //       style: TextStyle(
-                              //         color: Colors.grey,
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
-                              SizedBox(height: 30.0,),
+                              const SizedBox(
+                                height: 30.0,
+                              ),
                               Container(
                                 decoration:
                                     ThemeHelper().buttonBoxDecoration(context),
@@ -140,10 +106,9 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    if(otpCodeVisible){
+                                    if (otpCodeVisible) {
                                       verifyCode();
-                                    }
-                                    else{
+                                    } else {
                                       verifyNumber();
                                     }
 
@@ -195,31 +160,27 @@ class _LoginPageState extends State<LoginPage> {
   void verifyNumber() {
     auth.verifyPhoneNumber(
         phoneNumber: phoneController.text,
-        verificationCompleted: (PhoneAuthCredential credential) async{
+        verificationCompleted: (PhoneAuthCredential credential) async {
           await auth.signInWithCredential(credential).then((value) {
             print("You are logged in successfully");
           });
         },
-        verificationFailed: (FirebaseAuthException exception){
+        verificationFailed: (FirebaseAuthException exception) {
           print(exception.message);
         },
-        codeSent: (String verificationID, int? resendToken){
+        codeSent: (String verificationID, int? resendToken) {
           verificationIDReceived = verificationID;
           otpCodeVisible = true;
-          setState(() {
-
-          });
+          setState(() {});
         },
-        codeAutoRetrievalTimeout: (String verificationID){
-        });
+        codeAutoRetrievalTimeout: (String verificationID) {});
   }
 
-  void verifyCode() async{
+  void verifyCode() async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationIDReceived,
-        smsCode: otpController.text);
+        verificationId: verificationIDReceived, smsCode: otpController.text);
     await auth.signInWithCredential(credential).then((value) {
-      MyHomePage();
+      const MyHomePage();
     });
   }
 }

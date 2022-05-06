@@ -1,13 +1,9 @@
-
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:s_camera/pages/camera_page.dart';
 import 'package:s_camera/widgets/my_drawer.dart';
 
 import 'device_page.dart';
 import 'library_page.dart';
-
-import 'package:s_camera/widgets/my_drawer.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -35,12 +31,11 @@ class _MyHomePageState extends State<MyHomePage> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
-            gradient: LinearGradient(
-              colors: [Colors.purple,Colors.pink],
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-            )
-          ),
+              gradient: LinearGradient(
+                colors: [Colors.purple, Colors.pink],
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+              )),
         ),
         foregroundColor: Colors.white,
         elevation: 10,
@@ -48,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: OnClickCamera,
+            onPressed: _onClickCamera,
             icon: const Icon(Icons.splitscreen_outlined),
           ),
           IconButton(
@@ -62,40 +57,31 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       drawer: const MyDrawer(),
       body: _wighetOptions[_selectedIndex],
-<<<<<<< HEAD
-
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //     backgroundColor: Color.fromRGBO(255, 0, 0, 0.0),
-      //   child: Icon(Icons.admin_panel_settings_outlined)
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purpleAccent,
+        backgroundColor: Colors.pink,
         items: [
-=======
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
->>>>>>> aac2c72f152aa6c3ea0685704a5e296d5225123a
           BottomNavigationBarItem(
-            icon: Icon(Icons.widgets_outlined,color: _selectedIndex == 0 ? Colors.white:Colors.black,size: 30),
+            icon: Icon(Icons.widgets_outlined,
+                color: _selectedIndex == 0 ? Colors.white : Colors.black54,
+                size: 30),
             label: "Thiết bị",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.live_tv_outlined,color: _selectedIndex == 1 ? Colors.white:Colors.black,size: 30),
+            icon: Icon(Icons.live_tv_outlined,
+                color: _selectedIndex == 1 ? Colors.white : Colors.black54,
+                size: 30),
             label: "Thư viện",
           ),
         ],
         selectedItemColor: Colors.white,
-        selectedLabelStyle: TextStyle(fontSize: 15),
+        selectedLabelStyle: const TextStyle(fontSize: 15),
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
       ),
     );
   }
 
-  void OnClickCamera() {
+  void _onClickCamera() {
     Navigator.push(context, MaterialPageRoute(builder: gotoCamera));
   }
 

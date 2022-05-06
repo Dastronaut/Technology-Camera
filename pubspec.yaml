@@ -35,14 +35,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   hexcolor: ^2.0.6
   font_awesome_flutter: ^10.1.0
-<<<<<<< HEAD
   firebase_core: ^1.16.0
   firebase_auth: ^3.3.17
+  cloud_firestore: ^3.1.14
+  cloud_firestore_web: ^2.6.14
 
-=======
-  firebase_core: ^1.15.0
-  firebase_auth: ^3.3.15
->>>>>>> aac2c72f152aa6c3ea0685704a5e296d5225123a
 
 dev_dependencies:
   flutter_test:

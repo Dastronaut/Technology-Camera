@@ -16,7 +16,8 @@ class _CameraPageState extends State<CameraPage> {
       appBar: AppBar(
         foregroundColor: Colors.white,
         centerTitle: true,
-        title: const Text("Trực tiếp", style: TextStyle(fontSize: 25,color: Colors.white)),
+        title: const Text("Trực tiếp",
+            style: TextStyle(fontSize: 25, color: Colors.white)),
         actions: const [
           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
@@ -27,11 +28,10 @@ class _CameraPageState extends State<CameraPage> {
           decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
               gradient: LinearGradient(
-                colors: [Colors.purple,Colors.pink],
+                colors: [Colors.purple, Colors.pink],
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
-              )
-          ),
+              )),
         ),
         elevation: 10,
         shape: const RoundedRectangleBorder(
@@ -53,7 +53,7 @@ class _CameraPageState extends State<CameraPage> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.purpleAccent,
         type: BottomNavigationBarType.fixed,
-        items: const[
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt_outlined),
             label: "Chụp màn hình",
@@ -72,7 +72,7 @@ class _CameraPageState extends State<CameraPage> {
           ),
         ],
         selectedItemColor: Colors.white,
-        selectedLabelStyle: TextStyle(fontSize: 15),
+        selectedLabelStyle: const TextStyle(fontSize: 15),
       ),
     );
   }
