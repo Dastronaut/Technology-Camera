@@ -12,14 +12,14 @@ class DevicePage extends StatefulWidget {
 
 class _DevicePageState extends State<DevicePage> {
   final CollectionReference _mode =
-      FirebaseFirestore.instance.collection('modes');
+      FirebaseFirestore.instance.collection('control');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
         stream: _mode.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          if (streamSnapshot.hasData) {
+          if (streamSnapshot.hasData & streamSnapshot.data!.docs.isNotEmpty) {
             final DocumentSnapshot documentSnapshot =
                 streamSnapshot.data!.docs[0];
             bool _buzzer = documentSnapshot['buzzer'];

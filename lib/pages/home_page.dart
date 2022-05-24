@@ -14,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  final _wighetOptions = [
+  final _widgetOptions = [
     const DevicePage(),
     const LibraryPage(),
   ];
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       drawer: const MyDrawer(),
-      body: _wighetOptions[_selectedIndex],
+      body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.pink,
         items: [
