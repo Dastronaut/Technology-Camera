@@ -180,7 +180,10 @@ class _LoginPageState extends State<LoginPage> {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId: verificationIDReceived, smsCode: otpController.text);
     await auth.signInWithCredential(credential).then((value) {
-      const MyHomePage();
+      Navigator.pushReplacement(
+        context,
+          MaterialPageRoute(builder: (context) => const MyHomePage())
+      );
     });
   }
 }
