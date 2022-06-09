@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:s_camera/pages/library_page/firebase_api.dart';
-import 'package:s_camera/pages/library_page/firebase_file.dart';
+import 'package:s_camera/library_page/firebase_api.dart';
+import 'package:s_camera/library_page/firebase_file.dart';
 
-import 'library_page/image_page.dart';
-
+import 'package:s_camera/library_page/image_page.dart';
 class LibraryPage extends StatefulWidget {
   const LibraryPage({Key? key}) : super(key: key);
 
@@ -16,7 +15,6 @@ class _LibraryPageState extends State<LibraryPage> {
   @override
   void initState(){
     super.initState();
-
     futureFiles = FirebaseApi.listAll("StorageData/");
   }
   @override
@@ -36,7 +34,6 @@ class _LibraryPageState extends State<LibraryPage> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      buildHeader(files.length),
                       const SizedBox(height: 12,),
                       Expanded(
                         child: ListView.builder(
@@ -46,7 +43,9 @@ class _LibraryPageState extends State<LibraryPage> {
                             return buildFile(context, file);
                           },
                         ),
-                      )
+                      ),
+                      const SizedBox(height: 12,),
+                      buildHeader(files.length),
                     ],
                   );
                 }
@@ -55,14 +54,15 @@ class _LibraryPageState extends State<LibraryPage> {
       )
     );
   }
-
   Widget buildFile(BuildContext context, FirebaseFile file) => ListTile(
+    contentPadding: EdgeInsets.all(2.0),
     leading: Image.network(
       file.url,
-      width: 52,
-      height: 52,
+      width: 100,
+      height: 100,
       fit: BoxFit.cover,
     ),
+
     title: Text(
       file.name,
       style: TextStyle(
@@ -71,28 +71,33 @@ class _LibraryPageState extends State<LibraryPage> {
         color: Colors.blue,
       ),
     ),
+
     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ImagePage(file: file),
+      builder: (context) =>   ImagePage(file: file),
     )),
   );
 
   Widget buildHeader(int length) => ListTile(
 
-    tileColor: Colors.pink,
-    leading: Container(
-      width: 52,
-      height: 52,
-      child: Icon(
-        Icons.file_copy,
-        color: Colors.white,
-      ),
-    ),
-    title: Text(
-      "$length Files",
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-        color: Colors.white,
+    // tileColor: Colors.white,
+
+    // leading: Container(
+    //   width: 52,
+    //   height: 52,
+    //   child: Icon(
+    //     Icons.file_copy,
+    //     color: Colors.black54,
+    //   ),
+    // ),
+    title: Center(
+      child: Text(
+        "$length Images",
+        style: TextStyle(
+          // fontWeight: FontWeight.bold,
+          fontSize: 15,
+          color: Colors.black54,
+
+        ),
       ),
     ),
   );

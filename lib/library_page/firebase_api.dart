@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:s_camera/pages/library_page/firebase_file.dart';
+import 'package:s_camera/library_page/firebase_file.dart';
 import 'package:path_provider/path_provider.dart';
-
 class FirebaseApi{
   static Future<List<String>> _getDownLoadLinks(List<Reference> refs) =>
       Future.wait(refs.map((ref) => ref.getDownloadURL()).toList());

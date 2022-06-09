@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:s_camera/pages/library_page/firebase_file.dart';
+import 'package:s_camera/library_page/firebase_file.dart';
 
 import 'firebase_api.dart';
 
