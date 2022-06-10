@@ -79,16 +79,16 @@ class _LibraryPageState extends State<LibraryPage> {
 
   Widget buildHeader(int length) => ListTile(
 
-    // tileColor: Colors.white,
+    tileColor: Colors.white,
 
-    // leading: Container(
-    //   width: 52,
-    //   height: 52,
-    //   child: Icon(
-    //     Icons.file_copy,
-    //     color: Colors.black54,
-    //   ),
-    // ),
+    leading: Container(
+      width: 52,
+      height: 52,
+      child: Icon(
+        Icons.file_copy,
+        color: Colors.black54,
+      ),
+    ),
     title: Center(
       child: Text(
         "$length Images",
