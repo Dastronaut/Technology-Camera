@@ -105,19 +105,18 @@ class _LoginPageState extends State<LoginPage> {
                                           color: Colors.white),
                                     ),
                                   ),
+                                  // onPressed: () {
+                                  //   if (otpCodeVisible) {
+                                  //     verifyCode();
+                                  //   } else {
+                                  //     verifyNumber();
+                                  //   }
                                   onPressed: () {
-                                    if (otpCodeVisible) {
-                                      verifyCode();
-                                    } else {
-                                      verifyNumber();
-                                    }
-
-                                    //After successful login we will redirect to profile page. Let's create profile page now
-                                    // Navigator.pushReplacement(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             const MyHomePage()));
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MyHomePage()));
                                   },
                                 ),
                               ),
@@ -127,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                 //child: Text('Don\'t have an account? Create'),
                                 child: Text.rich(TextSpan(children: [
                                   const TextSpan(
-                                      text: "Don\'t have an account? "),
+                                      text: "Don't have an account? "),
                                   TextSpan(
                                     text: 'Create',
                                     recognizer: TapGestureRecognizer()
@@ -136,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    RegistrationPage()));
+                                                    const RegistrationPage()));
                                       },
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -181,9 +180,7 @@ class _LoginPageState extends State<LoginPage> {
         verificationId: verificationIDReceived, smsCode: otpController.text);
     await auth.signInWithCredential(credential).then((value) {
       Navigator.pushReplacement(
-        context,
-          MaterialPageRoute(builder: (context) => const MyHomePage())
-      );
+          context, MaterialPageRoute(builder: (context) => const MyHomePage()));
     });
   }
 }

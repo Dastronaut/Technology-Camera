@@ -1,5 +1,5 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:s_camera/pages/library_page/firebase_file.dart';
+import 'package:s_camera/utils/firebase_file.dart';
 
 class FirebaseApi {
   static Future<List<String>> _getDownLoadLinks(List<Reference> refs) =>

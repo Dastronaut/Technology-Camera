@@ -13,17 +13,19 @@ class DevicePage extends StatefulWidget {
 class _DevicePageState extends State<DevicePage> {
   final CollectionReference _mode =
       FirebaseFirestore.instance.collection('control');
+  bool _buzzer = false;
+  bool _lights = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+      body: StreamBuilder<QuerySnapshot>(
         stream: _mode.snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          if (streamSnapshot.hasData & streamSnapshot.data!.docs.isNotEmpty) {
+          if (streamSnapshot.hasData) {
             final DocumentSnapshot documentSnapshot =
                 streamSnapshot.data!.docs[0];
-            bool _buzzer = documentSnapshot['buzzer'];
-            bool _lights = documentSnapshot['light'];
+            _buzzer = documentSnapshot['buzzer'];
+            _lights = documentSnapshot['light'];
             return Container(
               constraints: const BoxConstraints.expand(),
               color: Colors.white,
@@ -107,7 +109,6 @@ class _DevicePageState extends State<DevicePage> {
               ),
             );
           }
-
           return const Center(
             child: CircularProgressIndicator(),
           );
