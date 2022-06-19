@@ -37,21 +37,6 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
               ),
             ),
-<<<<<<< HEAD
-            const DrawerListTile(
-                icon: Icon(Icons.person_outline), title: 'Hồ sơ của tôi'),
-            const DrawerListTile(
-                icon: Icon(Icons.photo_library_outlined),
-                title: 'Album của tôi'),
-            const DrawerListTile(
-                icon: Icon(Icons.settings_outlined), title: 'Cài đặt chung'),
-            const DrawerListTile(
-                icon: Icon(Icons.people_outline), title: 'Gia đình & khách'),
-            const DrawerListTile(
-                icon: Icon(Icons.info_outline), title: 'Thông tin thêm'),
-            const DrawerListTile(
-                icon: Icon(Icons.layers_outlined), title: 'Đăng xuất'),
-=======
             ListTile(
               leading: const Icon(Icons.person_outline),
               onTap: () {},
@@ -82,7 +67,6 @@ class _MyDrawerState extends State<MyDrawer> {
               title: const Text('Thông tin thêm'),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
             ),
->>>>>>> 6fb8850d8e6e38836f0d9a05e9d853dc88ea4643
           ],
         ),
       ),
