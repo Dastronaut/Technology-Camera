@@ -13,6 +13,7 @@ class DevicePage extends StatefulWidget {
 class _DevicePageState extends State<DevicePage> {
   final CollectionReference _mode =
       FirebaseFirestore.instance.collection('control');
+  bool _safety = false;
   bool _buzzer = false;
   bool _lights = false;
   @override
@@ -26,6 +27,7 @@ class _DevicePageState extends State<DevicePage> {
                 streamSnapshot.data!.docs[0];
             _buzzer = documentSnapshot['buzzer'];
             _lights = documentSnapshot['light'];
+            _safety = documentSnapshot['safety'];
             return Container(
               constraints: const BoxConstraints.expand(),
               color: Colors.white,
@@ -67,7 +69,26 @@ class _DevicePageState extends State<DevicePage> {
                           ],
                         ),
                         SwitchListTile(
-                          title: const Text('Alert'),
+                          title: const Text('Chế độ an toàn'),
+                          value: _safety,
+                          onChanged: (bool value) async {
+                            setState(() {
+                              _safety = value;
+                            });
+                            await _mode
+                                .doc(documentSnapshot.id)
+                                .update({"safety": value})
+                                .then((_) => log('Success'))
+                                .catchError((error) => log('Failed: $error'));
+                          },
+                          secondary: Icon(Icons.health_and_safety_outlined,
+                              color: _safety ? Colors.green : Colors.grey),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        SwitchListTile(
+                          title: const Text('Chuông'),
                           value: _buzzer,
                           onChanged: (bool value) async {
                             setState(() {
@@ -86,7 +107,7 @@ class _DevicePageState extends State<DevicePage> {
                           height: 8,
                         ),
                         SwitchListTile(
-                          title: const Text('Lights'),
+                          title: const Text('Đèn'),
                           value: _lights,
                           onChanged: (bool value) async {
                             setState(() {
