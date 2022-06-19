@@ -48,10 +48,9 @@ class _MyDrawerState extends State<MyDrawer> {
             const DrawerListTile(
                 icon: Icon(Icons.people_outline), title: 'Gia đình & khách'),
             const DrawerListTile(
-                icon: Icon(Icons.layers_outlined),
-                title: 'Tích hợp thông minh'),
-            const DrawerListTile(
                 icon: Icon(Icons.info_outline), title: 'Thông tin thêm'),
+            const DrawerListTile(
+                icon: Icon(Icons.layers_outlined), title: 'Đăng xuất'),
           ],
         ),
       ),

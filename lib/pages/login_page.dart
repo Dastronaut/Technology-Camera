@@ -6,7 +6,7 @@ import 'package:s_camera/pages/registration_page.dart';
 
 import '../common/theme_helper.dart';
 import '../widgets/header_widget.dart';
-
+enum Status { Waiting, Error }
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final double _headerHeight = 250;
   final Key _formKey = GlobalKey<FormState>();
-
+  var _status = Status.Waiting;
   TextEditingController phoneController = TextEditingController();
   TextEditingController otpController = TextEditingController();
 
@@ -72,22 +72,54 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 30.0,
                               ),
-                              Container(
-                                child: Visibility(
-                                  visible: otpCodeVisible,
-                                  child: TextField(
-                                    controller: otpController,
-                                    decoration: ThemeHelper()
-                                        .textInputDecoration(
-                                            'Code', 'Enter your code'),
+                              Column(
+                                children: [
+                                  Container(
+                                    child: Visibility(
+                                      visible: otpCodeVisible,
+                                      child: TextField(
+                                        controller: otpController,
+                                        decoration: ThemeHelper()
+                                            .textInputDecoration(
+                                                'Code', 'Enter your code'),
+                                        keyboardType: TextInputType.phone,
+                                      ),
+                                    ),
+                                    decoration:
+                                        ThemeHelper().inputBoxDecorationShaddow(),
                                   ),
-                                ),
-                                decoration:
-                                    ThemeHelper().inputBoxDecorationShaddow(),
+                                  const SizedBox(
+                                    height: 30.0,
+                                  ),
+                                  Visibility(
+                                    visible: otpCodeVisible,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                      child: Text.rich(TextSpan(children: [
+
+                                        const TextSpan(
+                                            text: "Don't receive code? "),
+                                        TextSpan(
+                                          text: 'ResendCode',
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              setState(() {
+                                                this._status = Status.Waiting;
+                                              });
+                                              verifyNumber();
+                                            },
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary),
+                                        ),
+                                      ])),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 30.0,
-                              ),
+
                               Container(
                                 decoration:
                                     ThemeHelper().buttonBoxDecoration(context),
@@ -105,46 +137,42 @@ class _LoginPageState extends State<LoginPage> {
                                           color: Colors.white),
                                     ),
                                   ),
-                                  // onPressed: () {
-                                  //   if (otpCodeVisible) {
-                                  //     verifyCode();
-                                  //   } else {
-                                  //     verifyNumber();
-                                  //   }
                                   onPressed: () {
                                     Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const MyHomePage()));
+                                        context, MaterialPageRoute(builder: (context) => const MyHomePage()));
+                                    // if (otpCodeVisible) {
+                                    //   verifyCode();
+                                    // } else {
+                                    //   verifyNumber();
+                                    // }
                                   },
                                 ),
                               ),
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                                //child: Text('Don\'t have an account? Create'),
-                                child: Text.rich(TextSpan(children: [
-                                  const TextSpan(
-                                      text: "Don't have an account? "),
-                                  TextSpan(
-                                    text: 'Create',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const RegistrationPage()));
-                                      },
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary),
-                                  ),
-                                ])),
-                              ),
+                              // Container(
+                              //   margin:
+                              //       const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                              //   //child: Text('Don\'t have an account? Create'),
+                              //   child: Text.rich(TextSpan(children: [
+                              //     const TextSpan(
+                              //         text: "Don't have an account? "),
+                              //     TextSpan(
+                              //       text: 'Create',
+                              //       recognizer: TapGestureRecognizer()
+                              //         ..onTap = () {
+                              //           Navigator.push(
+                              //               context,
+                              //               MaterialPageRoute(
+                              //                   builder: (context) =>
+                              //                       const RegistrationPage()));
+                              //         },
+                              //       style: TextStyle(
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Theme.of(context)
+                              //               .colorScheme
+                              //               .secondary),
+                              //     ),
+                              //   ])),
+                              // ),
                             ],
                           )),
                     ],

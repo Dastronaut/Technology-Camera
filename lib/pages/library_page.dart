@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:s_camera/pages/image_page.dart';
 import 'package:s_camera/utils/firebase_api.dart';
@@ -75,10 +76,8 @@ class _LibraryPageState extends State<LibraryPage> {
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => ImagePage(file: file),
         )),
-        onLongPress: () {
-          log('ON DELETING....');
-        },
-      );
+        onLongPress: (){},
+  );
 
   Widget buildHeader(int length) => ListTile(
         tileColor: Colors.white,
