@@ -76,9 +76,20 @@ class _LibraryPageState extends State<LibraryPage> {
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => ImagePage(file: file),
         )),
-        onLongPress: (){},
-  );
+        onLongPress: () async{
+          await Delete(file);
+          //file.ref.delete();
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Image deleted Successfully")));
 
+        }
+
+  );
+  Future<void> Delete(FirebaseFile file)async{
+    await file.ref.delete();
+    setState(() {
+
+    });
+  }
   Widget buildHeader(int length) => ListTile(
         tileColor: Colors.white,
         leading: const SizedBox(

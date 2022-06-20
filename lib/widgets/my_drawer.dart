@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:s_camera/pages/login_page.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -63,8 +64,10 @@ class _MyDrawerState extends State<MyDrawer> {
             ),
             ListTile(
               leading: const Icon(Icons.info_outline),
-              onTap: () {},
-              title: const Text('Thông tin thêm'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+              },
+              title: const Text('Đăng xuất'),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
             ),
           ],

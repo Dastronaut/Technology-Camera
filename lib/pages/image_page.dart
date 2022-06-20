@@ -11,7 +11,18 @@ class ImagePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(file.name),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                file.ref.delete();
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.delete)
+          )
+
+        ],
       ),
+
       body: Image.network(
         file.url,
         height: double.infinity,
@@ -19,4 +30,5 @@ class ImagePage extends StatelessWidget {
       ),
     );
   }
+
 }
