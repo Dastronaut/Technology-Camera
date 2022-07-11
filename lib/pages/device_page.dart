@@ -1,33 +1,31 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class DevicePage extends StatefulWidget {
-  const DevicePage({Key? key}) : super(key: key);
+  final String phoneNumber;
+  const DevicePage({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
   State<DevicePage> createState() => _DevicePageState();
 }
 
 class _DevicePageState extends State<DevicePage> {
-  final CollectionReference _mode =
-      FirebaseFirestore.instance.collection('control');
-  bool _safety = false;
+  final DatabaseReference controlRef = FirebaseDatabase.instance.ref('Control');
   bool _buzzer = false;
   bool _lights = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _mode.snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          if (streamSnapshot.hasData) {
-            final DocumentSnapshot documentSnapshot =
-                streamSnapshot.data!.docs[0];
-            _buzzer = documentSnapshot['buzzer'];
-            _lights = documentSnapshot['light'];
-            _safety = documentSnapshot['safety'];
+      body: StreamBuilder(
+        stream: controlRef.onValue,
+        builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data!.snapshot.value;
+            _buzzer = (data as Map)['Buzzer'];
+            _lights = (data)['Light'];
             return Container(
               constraints: const BoxConstraints.expand(),
               color: Colors.white,
@@ -68,22 +66,6 @@ class _DevicePageState extends State<DevicePage> {
                             ),
                           ],
                         ),
-                        SwitchListTile(
-                          title: const Text('Chế độ an toàn'),
-                          value: _safety,
-                          onChanged: (bool value) async {
-                            setState(() {
-                              _safety = value;
-                            });
-                            await _mode
-                                .doc(documentSnapshot.id)
-                                .update({"safety": value})
-                                .then((_) => log('Success'))
-                                .catchError((error) => log('Failed: $error'));
-                          },
-                          secondary: Icon(Icons.health_and_safety_outlined,
-                              color: _safety ? Colors.green : Colors.grey),
-                        ),
                         const SizedBox(
                           height: 8,
                         ),
@@ -94,11 +76,9 @@ class _DevicePageState extends State<DevicePage> {
                             setState(() {
                               _buzzer = value;
                             });
-                            await _mode
-                                .doc(documentSnapshot.id)
-                                .update({"buzzer": value})
-                                .then((_) => log('Success'))
-                                .catchError((error) => log('Failed: $error'));
+                            await controlRef.update({
+                              "Buzzer": value,
+                            });
                           },
                           secondary: Icon(Icons.warning,
                               color: _buzzer ? Colors.red : Colors.grey),
@@ -113,11 +93,9 @@ class _DevicePageState extends State<DevicePage> {
                             setState(() {
                               _lights = value;
                             });
-                            await _mode
-                                .doc(documentSnapshot.id)
-                                .update({"light": value})
-                                .then((_) => log('Success'))
-                                .catchError((error) => log('Failed: $error'));
+                            await controlRef.update({
+                              "Light": value,
+                            });
                           },
                           secondary: Icon(Icons.lightbulb,
                               color:
