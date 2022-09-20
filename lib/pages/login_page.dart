@@ -210,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
       final docUser = FirebaseFirestore.instance
           .collection('control')
           .doc(phoneController.text);
-      final user = prefix.User(buzzer: false, light: false, safety: false);
+      final user = prefix.User(buzzer: false, light: false);
       final json = user.toJson();
       await docUser.set(json);
     }
